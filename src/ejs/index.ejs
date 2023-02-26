@@ -1,0 +1,25 @@
+<%- include('layout/_head', { title: 'Game Life' }) %>
+<%- include('layout/_header') %>
+
+<main>
+    <div class="container">
+        <div class="life">
+            <div class="life__info">
+                <h2>Counter: <span class="js-counter">0</span></h2>
+            </div>
+            <div class="life__game-container">
+                <canvas class="js-game-life"></canvas>
+            </div>
+
+            <div class="life__controls">
+                <button class="life__button | js-run" type="button">Run</button>
+                <button class="life__button | js-stop" type="button">Pause</button>
+                <button class="life__button | js-restart" type="button">Restart</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('layout/_footer') %>
+<%- include('layout/_foot.ejs') %>
+
