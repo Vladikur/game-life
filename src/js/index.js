@@ -8,7 +8,7 @@ class Life {
         this.counter = 0
         this.game = null
         this.cell = 10
-        this.map = 600
+        this.map = 800
         this.gameSpeed = 100
         this.mapColor = '#2e3146'
         this.cellColor = '#ca354a'
@@ -47,35 +47,36 @@ class Life {
         if (this.isGameRunning) {
             this.cells.forEach((row, rowInd) => {
                 row.forEach((col, colInd) => {
+                    const leftCel =
+                        typeof this.cells[rowInd][colInd - 1] !== 'undefined' ?
+                            this.cells[rowInd][colInd - 1] :
+                            this.cells[rowInd][row.length - 1]
+
+                    const rightCell =
+                        typeof this.cells[rowInd][colInd + 1] !== 'undefined' ?
+                            this.cells[rowInd][colInd + 1] :
+                            this.cells[rowInd][0]
+
                     const neighbours = [
                         !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd - 1],
                         !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd],
                         !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd + 1],
-                        this.cells[rowInd][colInd - 1],
-                        this.cells[rowInd][colInd + 1],
+                        leftCel,
+                        rightCell,
                         !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd - 1],
                         !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd],
                         !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd + 1],
                     ]
-                    let aliveNeighbours = 0
 
-                    neighbours.forEach((item) => {
-                        if (item === 1) aliveNeighbours++
-                    })
+                    const aliveNeighbours = neighbours.filter((el) => el === 1).length
 
                     if (col === 0 && aliveNeighbours === 3) {
                         this.newCells[rowInd][colInd] = 1
-                    }
-
-                    if (col === 1 && aliveNeighbours < 2) {
+                    } else if (col === 1 && aliveNeighbours < 2) {
                         this.newCells[rowInd][colInd] = 0
-                    }
-
-                    if (col === 1 && aliveNeighbours > 1 && aliveNeighbours < 4) {
+                    } else if (col === 1 && aliveNeighbours > 1 && aliveNeighbours < 4) {
                         this.newCells[rowInd][colInd] = 1
-                    }
-
-                    if (col === 1 && aliveNeighbours > 3) {
+                    } else if (col === 1 && aliveNeighbours > 3) {
                         this.newCells[rowInd][colInd] = 0
                     }
                 })
