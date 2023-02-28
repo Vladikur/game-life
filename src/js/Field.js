@@ -1,4 +1,4 @@
-export default  function getField() {
+export default function getField() {
     const arrLength = 80
     const arr = []
 

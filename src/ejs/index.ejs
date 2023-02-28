@@ -4,17 +4,40 @@
 <main>
     <div class="container">
         <div class="life">
-            <div class="life__info">
-                <h2>Counter: <span class="js-counter">0</span></h2>
-            </div>
-            <div class="life__game-container">
-                <canvas class="js-game-life"></canvas>
-            </div>
 
-            <div class="life__controls">
-                <button class="life__button | js-run" type="button">Run</button>
-                <button class="life__button | js-stop" type="button">Pause</button>
-                <button class="life__button | js-restart" type="button">Restart</button>
+            <div class="life__game-container">
+                <div class="life__info">
+                    <h4>Counter: <span class="js-counter">0</span></h4>
+                </div>
+
+                <div class="life__game-box">
+                    <div class="life__examples">
+                        <button class="life__example | js-life-example" data-figure="long-liver-1" type="button">
+                            <div class="life__example-image">
+                                <img src="../i/1.jpg" alt="#">
+                            </div>
+
+                            <span class="life__example-name">Долгожитель 1</span>
+                        </button>
+
+                        <button class="life__example | js-life-example" data-figure="glider" type="button">
+                            <div class="life__example-image">
+                                <img src="../i/2.jpg" alt="#">
+                            </div>
+
+                            <span class="life__example-name">Планер</span>
+                        </button>
+                    </div>
+
+                    <canvas class="js-game-life"></canvas>
+                </div>
+
+                <div class="life__controls">
+                    <button class="life__button | js-run-btn" type="button">Run</button>
+                    <button class="life__button | js-stop-btn" type="button">Pause</button>
+                    <button class="life__button | js-restart-btn" type="button">Restart</button>
+                    <button class="life__button | js-speed-btn" type="button"></button>
+                </div>
             </div>
         </div>
     </div>

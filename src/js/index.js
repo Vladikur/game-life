@@ -1,6 +1,7 @@
 import 'normalize.css'
 import '../scss/index.scss'
 import getField from './Field'
+import Figures from './Figures'
 
 class Life {
     constructor() {
@@ -9,6 +10,7 @@ class Life {
         this.game = null
         this.cell = 10
         this.map = 800
+        this.speedText = 'normal'
         this.gameSpeed = 100
         this.mapColor = '#2e3146'
         this.cellColor = '#ca354a'
@@ -16,13 +18,19 @@ class Life {
         this.newCells = getField()
 
         this.counterElement = document.querySelector('.js-counter')
-        this.btnRun = document.querySelector('.js-run')
-        this.btnStop = document.querySelector('.js-stop')
-        this.btnRestart = document.querySelector('.js-restart')
+        this.btnRun = document.querySelector('.js-run-btn')
+        this.btnStop = document.querySelector('.js-stop-btn')
+        this.btnRestart = document.querySelector('.js-restart-btn')
+        this.btnSpeed = document.querySelector('.js-speed-btn')
+        this.btnsExampe = document.querySelectorAll('.js-life-example')
         this.canvas = document.querySelector('.js-game-life')
         this.ctx = this.canvas.getContext('2d')
         this.canvas.width = this.map
         this.canvas.height = this.map
+
+        this.figures = new Figures()
+
+        this.btnSpeed.textContent = `Speed: ${this.speedText}`
 
         this.runGame()
         this.addListeners()
@@ -47,25 +55,55 @@ class Life {
         if (this.isGameRunning) {
             this.cells.forEach((row, rowInd) => {
                 row.forEach((col, colInd) => {
-                    const leftCel =
-                        typeof this.cells[rowInd][colInd - 1] !== 'undefined' ?
-                            this.cells[rowInd][colInd - 1] :
-                            this.cells[rowInd][row.length - 1]
+                    const topRow =
+                        typeof this.cells[rowInd - 1] !== 'undefined' ?
+                            this.cells[rowInd - 1] :
+                            this.cells[row.length - 1]
 
-                    const rightCell =
-                        typeof this.cells[rowInd][colInd + 1] !== 'undefined' ?
-                            this.cells[rowInd][colInd + 1] :
-                            this.cells[rowInd][0]
+                    const currentRow = this.cells[rowInd]
+
+                    const bottomRow =
+                        typeof this.cells[rowInd + 1] !== 'undefined' ?
+                            this.cells[rowInd + 1] :
+                            this.cells[0]
+
+                    const topLeftCell = typeof topRow[colInd - 1] !== 'undefined' ?
+                        topRow[colInd - 1] :
+                        topRow[row.length - 1]
+
+                    const topCell = topRow[colInd]
+
+                    const topRightCell = typeof topRow[colInd + 1] !== 'undefined' ?
+                        topRow[colInd + 1] :
+                        topRow[0]
+
+                    const leftCel = typeof currentRow[colInd - 1] !== 'undefined' ?
+                        currentRow[colInd - 1] :
+                        currentRow[row.length - 1]
+
+                    const rightCell = typeof currentRow[colInd + 1] !== 'undefined' ?
+                        currentRow[colInd + 1] :
+                        currentRow[0]
+
+                    const bottomLeftCell = typeof bottomRow[colInd - 1] !== 'undefined' ?
+                        bottomRow[colInd - 1] :
+                        bottomRow[row.length - 1]
+
+                    const bottomCell = bottomRow[colInd]
+
+                    const bottomRightCell = typeof bottomRow[colInd + 1] !== 'undefined' ?
+                        bottomRow[colInd + 1] :
+                        bottomRow[0]
 
                     const neighbours = [
-                        !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd - 1],
-                        !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd],
-                        !this.cells[rowInd - 1] ? 0 : this.cells[rowInd - 1][colInd + 1],
+                        topLeftCell,
+                        topCell,
+                        topRightCell,
                         leftCel,
                         rightCell,
-                        !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd - 1],
-                        !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd],
-                        !this.cells[rowInd + 1] ? 0 : this.cells[rowInd + 1][colInd + 1],
+                        bottomLeftCell,
+                        bottomCell,
+                        bottomRightCell,
                     ]
 
                     const aliveNeighbours = neighbours.filter((el) => el === 1).length
@@ -96,6 +134,37 @@ class Life {
         }, this.gameSpeed)
     }
 
+    changeSpeed() {
+        if (this.speedText === 'slow') {
+            this.gameSpeed = 100
+            this.speedText = 'normal'
+        } else if (this.speedText === 'fast') {
+            this.gameSpeed = 200
+            this.speedText = 'slow'
+        } else if (this.speedText === 'normal') {
+            this.gameSpeed = 20
+            this.speedText = 'fast'
+        }
+
+        this.btnSpeed.textContent = `Speed: ${this.speedText}`
+        clearInterval(this.game)
+        this.runGame()
+    }
+
+    createFigure(e) {
+        const figure = e.currentTarget.dataset.figure
+        const cells = this.figures.newFigure(figure)
+
+        this.resetGame(cells)
+    }
+
+    resetGame(cells) {
+        this.isGameRunning = false
+        this.cells = cells
+        this.counter = 0
+        this.counterElement.textContent = this.counter
+    }
+
     addListeners() {
         this.btnRun.addEventListener('click', () => {
             this.isGameRunning = true
@@ -105,11 +174,20 @@ class Life {
             this.isGameRunning = false
         })
 
+        this.btnsExampe.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                this.createFigure(e)
+            })
+        })
+
+        this.btnSpeed.addEventListener('click', () => {
+            this.changeSpeed()
+        })
+
         this.btnRestart.addEventListener('click', () => {
-            this.isGameRunning = false
-            this.cells = getField()
-            this.counter = 0
-            this.counterElement.textContent = this.counter
+            const cells = getField()
+
+            this.resetGame(cells)
         })
 
         this.canvas.addEventListener('click', (e) => {
