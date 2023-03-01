@@ -17,6 +17,9 @@ export default class Figures {
             case 'pulsar':
                 fieldWithFigure = this.createPulsar()
                 break;
+            case 'glider-gun':
+                fieldWithFigure = this.createGliderGun()
+                break;
         }
 
         return fieldWithFigure
@@ -98,6 +101,49 @@ export default class Figures {
         figure[35][41] = 1
         figure[36][40] = 1
         figure[37][39] = 1
+
+        return figure
+    }
+
+    createGliderGun() {
+        const figure = getField()
+
+        figure[30][21] = 1
+        figure[30][22] = 1
+        figure[31][21] = 1
+        figure[31][22] = 1
+        figure[30][31] = 1
+        figure[31][31] = 1
+        figure[32][31] = 1
+        figure[29][32] = 1
+        figure[28][33] = 1
+        figure[28][34] = 1
+        figure[33][32] = 1
+        figure[34][33] = 1
+        figure[34][34] = 1
+        figure[31][35] = 1
+        figure[29][36] = 1
+        figure[33][36] = 1
+        figure[32][37] = 1
+        figure[31][37] = 1
+        figure[30][37] = 1
+        figure[31][38] = 1
+        figure[30][41] = 1
+        figure[29][41] = 1
+        figure[28][41] = 1
+        figure[30][42] = 1
+        figure[29][42] = 1
+        figure[28][42] = 1
+        figure[27][43] = 1
+        figure[31][43] = 1
+        figure[31][45] = 1
+        figure[32][45] = 1
+        figure[27][45] = 1
+        figure[26][45] = 1
+        figure[29][55] = 1
+        figure[28][55] = 1
+        figure[29][56] = 1
+        figure[28][56] = 1
 
         return figure
     }
