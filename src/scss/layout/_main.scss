@@ -24,6 +24,10 @@ main {
     @include hover {
       background-color: var(--primary-darken-color);
     }
+
+    @include active {
+      background-color: var(--primary-lighten-color);
+    }
   }
 
   &__example-image {
@@ -53,9 +57,39 @@ main {
     margin-right: 10px;
     height: 100%;
     background-color: var(--accent-darken-color-3);
-    border-radius: 8px;
+    border-radius: 16px;
     transform: translateX(-100%);
     overflow-y: auto;
+  }
+
+  &__info-button {
+    @include box(130px);
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    transition: background-color $trTime $easeDefault;
+
+    @include hover {
+      background-color: var(--primary-darken-color);
+    }
+
+    @include active {
+      background-color: var(--primary-lighten-color);
+    }
+
+    span {
+      font-weight: 600;
+      color: var(--text-contrast-color);
+    }
+  }
+
+  &__info-container {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform: translateX(100%);
   }
 
   &__game-container {
@@ -68,7 +102,7 @@ main {
     position: relative;
     padding: 10px 10px 5px 10px;
     background: var(--accent-darken-color-3);
-    border-radius: 8px;
+    border-radius: 16px;
 
     canvas {
       margin: 0;
@@ -82,6 +116,7 @@ main {
   &__controls {
     display: flex;
     align-items: center;
+    width: 100%;
     margin: 10px 0;
     color: var(--text-contrast-color);
   }
@@ -90,7 +125,7 @@ main {
     background-color: var(--accent-darken-color-3);
     color: var(--text-contrast-color);
     padding: 8px 30px;
-    border-radius: 8px;
+    border-radius: 16px;
     margin: 10px 0;
   }
 
@@ -99,11 +134,19 @@ main {
     padding: 5px 25px;
     background-color: var(--primary-color);
     color: var(--text-contrast-color);
-    border-radius: 8px;
+    border-radius: 100px;
     transition: background-color $trTime $easeDefault;
+
+    &:last-of-type {
+      margin-left: auto;
+    }
 
     @include hover {
       background-color: var(--primary-darken-color);
+    }
+
+    @include active {
+      background-color: var(--primary-lighten-color);
     }
 
     &:not(:last-of-type) {

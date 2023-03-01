@@ -14,6 +14,9 @@ export default class Figures {
             case 'locomotive':
                 fieldWithFigure = this.createLocomotive()
                 break;
+            case 'pulsar':
+                fieldWithFigure = this.createPulsar()
+                break;
         }
 
         return fieldWithFigure
@@ -72,6 +75,29 @@ export default class Figures {
         figure[37][44] = 1
         figure[38][43] = 1
         figure[40][43] = 1
+
+        return figure
+    }
+
+    createPulsar() {
+        const figure = getField()
+
+        figure[38][38] = 1
+        figure[39][38] = 1
+        figure[40][39] = 1
+        figure[41][40] = 1
+        figure[42][41] = 1
+        figure[42][42] = 1
+        figure[41][43] = 1
+        figure[40][44] = 1
+        figure[38][45] = 1
+        figure[39][45] = 1
+        figure[37][44] = 1
+        figure[36][43] = 1
+        figure[35][42] = 1
+        figure[35][41] = 1
+        figure[36][40] = 1
+        figure[37][39] = 1
 
         return figure
     }

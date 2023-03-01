@@ -14,6 +14,7 @@ class Life {
         this.gameSpeed = 100
         this.mapColor = '#2e3146'
         this.cellColor = '#ca354a'
+        this.gridColor = 'rgba(255, 255, 255, 0.1)'
         this.cells = getField()
         this.newCells = getField()
 
@@ -40,6 +41,22 @@ class Life {
         this.ctx.clearRect(0, 0, this.map, this.map)
         this.ctx.fillStyle = this.mapColor
         this.ctx.fillRect(0, 0, this.map, this.map)
+
+        this.cells.forEach((item, ind) => {
+            this.ctx.beginPath()
+            this.ctx.moveTo(0, ind * this.cell)
+            this.ctx.lineTo(this.map, ind * this.cell)
+            this.ctx.strokeStyle = this.gridColor
+            this.ctx.lineWidth = 1
+            this.ctx.stroke()
+
+            this.ctx.beginPath()
+            this.ctx.moveTo(ind * this.cell, 0)
+            this.ctx.lineTo(ind * this.cell, this.map)
+            this.ctx.strokeStyle = this.gridColor
+            this.ctx.lineWidth = 1
+            this.ctx.stroke()
+        })
 
         this.cells.forEach((row, rowInd) => {
             row.forEach((col, colInd) => {

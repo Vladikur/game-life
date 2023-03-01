@@ -1,6 +1,29 @@
 <%- include('layout/_head', { title: 'Game Life' }) %>
 <%- include('layout/_header') %>
 
+<% const buttons = [
+    {
+        data: 'long-liver-1',
+        img: '../i/1.jpg',
+        name: 'Долгожитель'
+    },
+    {
+        data: 'glider',
+        img: '../i/2.jpg',
+        name: 'Планер'
+    },
+    {
+        data: 'locomotive',
+        img: '../i/3.jpg',
+        name: 'Паровоз'
+    },
+    {
+        data: 'pulsar',
+        img: '../i/4.jpg',
+        name: 'Пульсар'
+    }
+] %>
+
 <main>
     <div class="container">
         <div class="life">
@@ -12,39 +35,36 @@
 
                 <div class="life__game-box">
                     <div class="life__examples">
-                        <button class="life__example | js-life-example" data-figure="long-liver-1" type="button">
-                            <div class="life__example-image">
-                                <img src="../i/1.jpg" alt="#">
-                            </div>
+                        <% buttons.forEach(({ data, img, name }) => { %>
+                            <button class="life__example | js-life-example"
+                                    data-figure="<%- data %>"
+                                    type="button">
+                                <div class="life__example-image">
+                                    <img src="<%- img %>" alt="#">
+                                </div>
 
-                            <span class="life__example-name">Долгожитель 1</span>
-                        </button>
-
-                        <button class="life__example | js-life-example" data-figure="glider" type="button">
-                            <div class="life__example-image">
-                                <img src="../i/2.jpg" alt="#">
-                            </div>
-
-                            <span class="life__example-name">Планер</span>
-                        </button>
-
-                        <button class="life__example | js-life-example" data-figure="locomotive" type="button">
-                            <div class="life__example-image">
-                                <img src="../i/3.jpg" alt="#">
-                            </div>
-
-                            <span class="life__example-name">Паровоз 1</span>
-                        </button>
+                                <span class="life__example-name"><%- name %></span>
+                            </button>
+                        <% }) %>
                     </div>
 
                     <canvas class="js-game-life"></canvas>
+
+                    <div class="life__info-container">
+                        <button class="life__info-button">
+                            <span>Об игре</span>
+                        </button>
+                        <button class="life__info-button">
+                            <span>Как играть</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="life__controls">
                     <button class="life__button | js-run-btn" type="button">Run</button>
                     <button class="life__button | js-stop-btn" type="button">Pause</button>
-                    <button class="life__button | js-restart-btn" type="button">Restart</button>
                     <button class="life__button | js-speed-btn" type="button"></button>
+                    <button class="life__button | js-restart-btn" type="button">Restart</button>
                 </div>
             </div>
         </div>
