@@ -1,5 +1,5 @@
 main {
-  background-color: var(--text-color);
+  background-color: var(--accent-lighten-color);
   min-height: 100vh;
 }
 
@@ -19,14 +19,16 @@ main {
     padding: 8px;
     overflow: hidden;
     color: var(--text-contrast-color);
-    transition: background-color $trTime $easeDefault;
+    transition: background-color $trTime $easeDefault, transform $trTime $easeDefault;
+    will-change: transform;
+    box-shadow: var(--block-box-shdow);
 
     @include hover {
       background-color: var(--primary-darken-color);
     }
 
     @include active {
-      background-color: var(--primary-lighten-color);
+      transform: scale(0.9);
     }
   }
 
@@ -48,32 +50,31 @@ main {
   &__examples {
     position: absolute;
     top: 0;
-    left: -10px;
+    left: -20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    padding-bottom: 5px;
     width: 200px;
-    padding: 10px;
-    margin-right: 10px;
     height: 100%;
-    background-color: var(--accent-darken-color-3);
-    border-radius: 16px;
+    margin-right: 10px;
     transform: translateX(-100%);
-    overflow-y: auto;
   }
 
   &__info-button {
     @include box(130px);
     border-radius: 50%;
     background-color: var(--primary-color);
-    transition: background-color $trTime $easeDefault;
+    transition: background-color $trTime $easeDefault, transform $trTime $easeDefault;
+    box-shadow: var(--block-box-shdow);
+    will-change: transform;
 
     @include hover {
       background-color: var(--primary-darken-color);
     }
 
     @include active {
-      background-color: var(--primary-lighten-color);
+      transform: scale(0.9);
     }
 
     span {
@@ -85,7 +86,7 @@ main {
   &__info-container {
     position: absolute;
     top: 0;
-    right: -10px;
+    right: -20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -100,9 +101,6 @@ main {
 
   &__game-box {
     position: relative;
-    padding: 10px 10px 5px 10px;
-    background: var(--accent-darken-color-3);
-    border-radius: 16px;
 
     canvas {
       margin: 0;
@@ -110,6 +108,7 @@ main {
       cursor: pointer;
       border-radius: 8px;
       overflow: hidden;
+      box-shadow: var(--block-box-shdow);
     }
   }
 
@@ -117,16 +116,17 @@ main {
     display: flex;
     align-items: center;
     width: 100%;
-    margin: 10px 0;
+    margin: 20px 0;
     color: var(--text-contrast-color);
   }
 
   &__info {
-    background-color: var(--accent-darken-color-3);
+    background-color: var(--text-color);
     color: var(--text-contrast-color);
     padding: 8px 30px;
     border-radius: 16px;
-    margin: 10px 0;
+    margin: 20px 0;
+    box-shadow: var(--block-box-shdow);
   }
 
   &__button {
@@ -135,7 +135,9 @@ main {
     background-color: var(--primary-color);
     color: var(--text-contrast-color);
     border-radius: 100px;
-    transition: background-color $trTime $easeDefault;
+    transition: background-color $trTime $easeDefault, transform $trTime $easeDefault;
+    box-shadow: var(--block-box-shdow);
+    will-change: transform;
 
     &:last-of-type {
       margin-left: auto;
@@ -146,7 +148,7 @@ main {
     }
 
     @include active {
-      background-color: var(--primary-lighten-color);
+      transform: scale(0.9);
     }
 
     &:not(:last-of-type) {

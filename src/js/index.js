@@ -13,7 +13,7 @@ class Life {
         this.speedText = 'normal'
         this.gameSpeed = 100
         this.mapColor = '#2e3146'
-        this.cellColor = '#ca354a'
+        this.cellColor = '#dc475c'
         this.gridColor = 'rgba(255, 255, 255, 0.1)'
         this.cells = getField()
         this.newCells = getField()
