@@ -2,6 +2,7 @@ import 'normalize.css'
 import '../scss/index.scss'
 import getField from './Field'
 import Figures from './Figures'
+import Popup from './Popup'
 
 class Life {
     constructor() {
@@ -32,6 +33,8 @@ class Life {
         this.figures = new Figures()
 
         this.btnSpeed.textContent = `Speed: ${this.speedText}`
+
+        new Popup()
 
         this.runGame()
         this.addListeners()
